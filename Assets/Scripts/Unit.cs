@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    public int MaxHealth;
     public int Health;
     public int Initiative = -1;
     public int MovementPoints;
-    public int MovementRemaining;
-    public int ActionPoints;
-    public int ActionPointsRemaining;
+    public int MovementPointsRemaining;
+    public int ManaPoints;
+    public int ManaPointsRemaining;
     public bool ActiveTurn;
 
     public Sprite unitIcon;

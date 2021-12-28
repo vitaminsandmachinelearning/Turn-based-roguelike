@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,6 @@ using UnityEngine.UI;
 
 public class TurnController : MonoBehaviour
 {
-    int roundCount = 0;
-    bool newRound = false;
     Unit[] units;
     public List<Unit> turnOrder;
 
@@ -19,11 +18,6 @@ public class TurnController : MonoBehaviour
     
     private void Update()
     {
-        if (newRound)
-        {
-            newRound = false;
-            NewRound();
-        }
         TurnPointer.transform.position = turnOrder.Last().transform.position + turnPointerOffset;
     }
 
@@ -39,8 +33,6 @@ public class TurnController : MonoBehaviour
         //ORDER ASCENDING BECAUSE TURNS USE LAST UNIT ON LIST
         SortTurnOrder();
 
-        turnOrder.Last().ActiveTurn = true;
-
         GetComponent<TurnOrderUI>().BuildTurnOrderList();
     }
 
@@ -49,75 +41,57 @@ public class TurnController : MonoBehaviour
         turnOrder = units.OrderBy(x => x.Initiative).ToList();
     }
 
-    void ResetUnitStats()
+    void ResetUnitStats(Unit u)
     {
-        foreach (Unit u in units)
-        {
-            u.ActionPointsRemaining = u.ActionPoints;
-            u.MovementRemaining = u.MovementPoints;
-        }
-    }
-
-    void NewRound()
-    {
-        ResetUnitStats();
-        StartCoroutine(StartRound());
+        u.ManaPointsRemaining = u.ManaPoints;
+        u.MovementPointsRemaining = u.MovementPoints;
+        Util.UpdatePlayerUI();
     }
 
     IEnumerator StartRound()
     {
-        //start first turn before loop starts
-        if (turnOrder.Last().gameObject.activeSelf)
-            StartNextTurn(turnOrder.Last());
         while (Combat)
         {
+            Unit current = turnOrder.Last();
             //Wait if turn still going
-            if (turnOrder.Last().ActiveTurn)
-                yield return null;
+            if (current.ActiveTurn)
+            {
+                Debug.Log("turn is active");
+                if (current.name.Equals("Player"))
+                {
+                    if (current.MovementPointsRemaining <= 0 && current.ManaPointsRemaining <= 0)
+                        current.ActiveTurn = false;
+                }
+                else
+                {
+                    Debug.Log("waiting turn end");
+                    yield return null;
+                }
+            }
             else
             {
+                Debug.Log("turn is ended");
                 //End turn and rotate list when turn finished
-                if (turnOrder.Last().gameObject.activeSelf)
-                    TurnEndEffects(turnOrder.Last());
+                if (current.gameObject.activeSelf)
+                    TurnEndEffects(current);
                 turnOrder.RemoveAll(x => x == null);
-                MoveToFront();
+                MoveToFront(current);
                 //Start next turn if next object in list is active
-                if (turnOrder.Last().gameObject.activeSelf)
-                    StartNextTurn(turnOrder.Last());
+                if (current.gameObject.activeSelf)
+                    StartNextTurn(current);
             }
         }
-        roundCount++;
-        newRound = true;
-    }
-    void StartNextTurn(Unit u)
-    {    
-        //if(!u.name.Equals("Player"))
-        //    Debug.Log("<b><color=red>" + u.name + " taking turn. "+u.Initiative+"</color></b>");
-        //else
-        //    Debug.Log("<b><color=green>" + u.name + " taking turn. </color></b>");
-
-        //Swap from u to unit in case of units transforming back
-
-        var unit = TurnStartEffects(u);
-        unit.ActiveTurn = true;
-
-        //Start enemy AI turn or skip player turn if player is transformed
-        if (unit.GetComponent<Enemy>() != null)
-            unit.GetComponent<Enemy>().TakeTurn();
-        else if (unit.name.Equals("Player"))
-            if (unit.GetComponent<StatusEffects>() != null)
-                if (unit.GetComponent<StatusEffects>().transformed != null)
-                    unit.ActiveTurn = false;
     }
 
-    void MoveToFront()
+    void MoveToFront(Unit u)
     {
-        turnOrder.Insert(0, turnOrder.Last());
-        turnOrder.RemoveAt(turnOrder.Count - 1);
-        GetComponent<TurnOrderUI>().Next();
+        Debug.Log("moving " + u.name);
+        u = turnOrder.Find(x => x == u);
+        turnOrder.Remove(u);
+        turnOrder.Insert(0, u);
+        GetComponent<TurnOrderUI>().MoveToFront(u);
     }
 
-    //if insert is true, re-sort list
     public void InsertTransformedUnit(Unit u, bool atEnd)
     {
 
@@ -129,6 +103,30 @@ public class TurnController : MonoBehaviour
             turnOrder.Insert(nextInQueueByInitiative, u);
         }
         GetComponent<TurnOrderUI>().AddTurnOrderBox(u);
+    }
+
+    void StartNextTurn(Unit u)
+    {
+        if (!u.name.Equals("Player"))
+            Debug.Log("<b><color=red>" + u.name + " taking turn. " + u.Initiative + "</color></b>");
+        else
+            Debug.Log("<b><color=green>" + u.name + " taking turn. </color></b>");
+
+        if (!u.gameObject.activeSelf)
+            u.ActiveTurn = false;
+
+        //Swap from u to unit in case of units transforming back
+        ResetUnitStats(u);
+        var unit = TurnStartEffects(u);
+        unit.ActiveTurn = true;
+
+        //Start enemy AI turn or skip player turn if player is transformed
+        if (unit.GetComponent<Enemy>() != null)
+            unit.GetComponent<Enemy>().TakeTurn();
+        else if (unit.name.Equals("Player"))
+            if (unit.GetComponent<StatusEffects>() != null)
+                if (unit.GetComponent<StatusEffects>().transformed != null)
+                    unit.ActiveTurn = false;
     }
 
     Unit TurnStartEffects(Unit u)
@@ -157,6 +155,7 @@ public class TurnController : MonoBehaviour
                 u.GetComponent<Enemy>().TakeTurn();
             s.UpdateStatusIndicators();
         }
+        Util.UpdatePlayerUI();
         return u;
     }
 
@@ -173,6 +172,7 @@ public class TurnController : MonoBehaviour
                 }
             s.UpdateStatusIndicators();
         }
+        Util.UpdatePlayerUI();
     }
 
     public void DEBUG_STARTCOMBAT()
@@ -186,6 +186,6 @@ public class TurnController : MonoBehaviour
         foreach (Unit u in units)
             u.Initiative = -1;
         BuildTurnOrderList();
-        NewRound();
+        StartCoroutine(StartRound());
     }
 }

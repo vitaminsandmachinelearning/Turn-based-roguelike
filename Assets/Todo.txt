@@ -18,13 +18,11 @@ Gameplay
 		Bugs
 			Turn order artificially delayed for enemies. 
 				When enemy turns implemented remove turndelay in enemy.cs and turndelay parameter in statuseffects.cs > transformback
-			Turn order frog shenanigans
+			Fix turn order and turn order ui to deal with units moving in and out of turn order lists.
 		Actions
 			Points
 			Attacks
 			Spells
-		Movement
-			Obstacles
 
 	Combat
 		Combat start
@@ -61,6 +59,6 @@ Gameplay
 UI
 	Unit stats
 	Unit range on hover
-	Action buttons (Move, attack, etc)
+	Action buttons (Move, spell, etc.)
 	Spellbook
 		Upgrade with runes

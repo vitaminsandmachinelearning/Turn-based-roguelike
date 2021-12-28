@@ -42,10 +42,11 @@ public class TurnOrderUI : MonoBehaviour
         turnOrderUIInstances.Remove(instance);
     }
 
-    public void Next()
+    public void MoveToFront(Unit u)
     {
-        turnOrderUIInstances.Add(turnOrderUIInstances[0]);
-        turnOrderUIInstances.RemoveAt(0);
-        turnOrderUIInstances.Last().transform.SetAsLastSibling();
+        var unitObject = turnOrderUIInstances.Find(x => x.GetComponentInChildren<TurnOrderUIUnitHolder>().unit == u);
+        turnOrderUIInstances.Remove(unitObject);
+        turnOrderUIInstances.Insert(0, unitObject);
+        unitObject.transform.SetAsLastSibling();
     }
 }

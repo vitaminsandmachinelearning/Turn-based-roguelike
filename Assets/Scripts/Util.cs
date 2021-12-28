@@ -20,5 +20,10 @@ namespace Assets.Scripts
         { 
             return AstarPath.active.GetNearest(Camera.main.ScreenToWorldPoint(Input.mousePosition)).node;
         }
+
+        public static void UpdatePlayerUI()
+        {
+            GameObject.FindObjectOfType<PlayerUI>().UpdateUI();
+        }
     }
 }

@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,10 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     public bool canInput = true;
-    public bool movementInput = false;
     public Vector2 mousePosition;
     MapController mp;
     TurnController tc;
-    Unit player;
+    Unit unit;
 
     public bool movementRangeHighlighted = false;
 
@@ -18,7 +18,7 @@ public class InputController : MonoBehaviour
     {
         mp = FindObjectOfType<MapController>();
         tc = FindObjectOfType<TurnController>();
-        player = GameObject.Find("Player").GetComponent<Unit>();
+        unit = GameObject.Find("Player").GetComponent<Unit>();
     }
 
     private void Update()
@@ -26,19 +26,18 @@ public class InputController : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (canInput)
         {
-            if (player.ActiveTurn)
+            if (unit.ActiveTurn)
             {
                 //Movement controls
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     FindObjectOfType<SpellBook>().currentSpell = null;
                     movementRangeHighlighted = true;
-                    mp.HighlightMovementRange(player.transform.position, player.MovementRemaining);
+                    mp.HighlightMovementRange(unit.transform.position, unit.MovementPointsRemaining);
                 }
-                if (Input.GetMouseButtonDown(0) && !movementInput && movementRangeHighlighted)
+                if (Input.GetMouseButtonDown(0) && movementRangeHighlighted)
                 {
-                    movementInput = true;
-                    movementRangeHighlighted = false;
+                    StartMovement();
                 }
 
                 //casting controls
@@ -63,7 +62,7 @@ public class InputController : MonoBehaviour
                 //Turn controls
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    player.ActiveTurn = false;
+                    unit.ActiveTurn = false;
                 }
             }
             //Interface controls
@@ -75,11 +74,32 @@ public class InputController : MonoBehaviour
         }
     }
 
+    void StartMovement()
+    {
+        movementRangeHighlighted = false;
+        GraphNode nearestToMouseClick = AstarPath.active.GetNearest(mousePosition).node;
+        if (Util.NodesInRange(unit.transform.position, unit.MovementPointsRemaining).Contains(nearestToMouseClick))
+        {
+            //Can't move onto squares with units already occupying
+            List<Unit> units = new List<Unit>(FindObjectsOfType<Unit>());
+            foreach (Unit u in units)
+            {
+                if (AstarPath.active.GetNearest(u.transform.position).node.Equals(nearestToMouseClick))
+                    return;
+            }
+            canInput = false;
+            GetComponent<TurnBasedMovementAI>().StartMovementCalculation(mousePosition);
+        }
+    }
 
-    public void FinishMoving()
+    public void FinishedMoving()
     {
         canInput = true;
-        movementInput = false;
         mousePosition = transform.position;
+    }
+
+    public void StartedMoving()
+    {
+        Util.UpdatePlayerUI();
     }
 }
