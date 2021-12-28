@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="TurnOrderBox" style="flex-basis: auto; align-items: center; width: auto; height: 100%; min-width: 60px; min-height: 60%; background-image: url(&apos;project://database/Assets/Sprites/altas.png?fileID=1570598292&amp;guid=486e5f4ae33464542aafcddb62dfa7f6&amp;type=3#altas_10&apos;); -unity-background-scale-mode: scale-to-fit; background-color: rgba(255, 255, 255, 0); flex-grow: 0; flex-shrink: 1; margin-left: 2%; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; justify-content: space-around;">
+        <ui:VisualElement style="width: 85%; height: 85%; background-image: url(&apos;project://database/Assets/Sprites/altas.png?fileID=-938989197&amp;guid=486e5f4ae33464542aafcddb62dfa7f6&amp;type=3#a1&apos;); -unity-background-scale-mode: scale-and-crop;" />
+    </ui:VisualElement>
+</ui:UXML>

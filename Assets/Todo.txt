@@ -1,0 +1,66 @@
+Player
+	Runes
+	Spell book
+	Stats
+	XP
+		Level
+		Growth
+
+Enemies
+	Movement
+	Stats
+
+Gameplay
+	Load in to map
+		Move units to correct places
+
+	Turns
+		Bugs
+			Turn order artificially delayed for enemies. 
+				When enemy turns implemented remove turndelay in enemy.cs and turndelay parameter in statuseffects.cs > transformback
+			Turn order frog shenanigans
+		Actions
+			Points
+			Attacks
+			Spells
+		Movement
+			Obstacles
+
+	Combat
+		Combat start
+			Effects
+		Damage and health
+		Combat end
+			Effects
+			Rewards
+
+	Map
+		out-of-combat map
+			rooms
+				randomly-generated combat rooms
+					obstacles
+					enemies
+						pool of enemies per zone/level/etc.
+					Interactive objects (Doors, switches, chests)
+				event rooms
+				puzzle rooms
+				shops
+				gamble rooms
+
+	Spells
+		Modifications
+			Projectile
+				Split OnHit
+				Split OnCast
+				Damage over distance
+			StatusEffects
+				Shock +x% damage for y turns
+		LightningBolt
+		Delayed falling daggers
+
+UI
+	Unit stats
+	Unit range on hover
+	Action buttons (Move, attack, etc)
+	Spellbook
+		Upgrade with runes
