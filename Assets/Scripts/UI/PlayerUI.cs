@@ -29,7 +29,8 @@ public class PlayerUI : MonoBehaviour
     public void UpdateUI()
     {
         HealthText.text = unit.Health + "/" + unit.MaxHealth;
-        Vector3 healthBarScale = new Vector3(unit.Health / unit.MaxHealth, 1, 1);
+        Vector3 healthBarScale = new Vector3(Mathf.Clamp(unit.Health / (float)unit.MaxHealth, 0f, 1f), 1, 1);
+        HealthBarImage.localScale = healthBarScale;
 
         foreach (GameObject go in ManaCrystalIcons)
             Destroy(go);

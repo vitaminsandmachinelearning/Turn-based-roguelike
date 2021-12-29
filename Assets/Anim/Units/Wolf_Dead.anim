@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PoisonIndicator1
+  m_Name: Wolf_Dead
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 461029629, guid: 299032903600ec74c96b8482d00d0cb5, type: 3}
-    - time: 0.083333336
-      value: {fileID: -536727620, guid: 299032903600ec74c96b8482d00d0cb5, type: 3}
-    - time: 0.16666667
-      value: {fileID: -1865663229, guid: 299032903600ec74c96b8482d00d0cb5, type: 3}
+      value: {fileID: 1701207892, guid: 44a728db23cea9d478f4eacb91f28ebe, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -45,15 +41,13 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
     pptrCurveMapping:
-    - {fileID: 461029629, guid: 299032903600ec74c96b8482d00d0cb5, type: 3}
-    - {fileID: -536727620, guid: 299032903600ec74c96b8482d00d0cb5, type: 3}
-    - {fileID: -1865663229, guid: 299032903600ec74c96b8482d00d0cb5, type: 3}
+    - {fileID: 1701207892, guid: 44a728db23cea9d478f4eacb91f28ebe, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.083333336
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

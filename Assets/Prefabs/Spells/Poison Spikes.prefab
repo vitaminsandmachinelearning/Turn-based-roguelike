@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   targetType: 1
-  castRange: 0
+  castRange: 4
 --- !u!114 &7503176646091451973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,3 +137,4 @@ MonoBehaviour:
   poisonDuration: 3
   poisonDamage: 4
   freezeDuration: 0
+  shockPercentage: 0

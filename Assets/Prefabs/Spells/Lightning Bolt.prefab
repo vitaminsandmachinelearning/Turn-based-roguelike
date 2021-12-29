@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   targetType: 1
-  castRange: 0
+  castRange: 5
 --- !u!114 &5785223030940690031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,5 +151,4 @@ MonoBehaviour:
   poisonDuration: 0
   poisonDamage: 0
   freezeDuration: 0
-  shockDuration: 2
   shockPercentage: 25

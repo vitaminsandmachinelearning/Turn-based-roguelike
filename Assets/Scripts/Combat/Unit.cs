@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Unit : MonoBehaviour
+public class Unit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public int MaxHealth;
     public int Health;
@@ -17,6 +18,8 @@ public class Unit : MonoBehaviour
     public bool processingTurnActions;
 
     public Sprite unitIcon;
+    VisionController vc;
+    UnitUI unitUI;
 
     public void TakeDamage(int damage)
     {
@@ -37,12 +40,47 @@ public class Unit : MonoBehaviour
     public void Die()
     {
         Alive = false;
-        Debug.Log(name + " is dead.");
+        FindObjectOfType<TurnOrderUI>().RemoveUnit(this);
+        GetComponent<Animator>().SetBool("Dead", true);
+        Debug.Log(name);
+        SendMessage("OnDie", null, SendMessageOptions.DontRequireReceiver);
     }
 
     public void ResetStats()
     {
         ManaPointsRemaining = ManaPoints;
         MovementPointsRemaining = MovementPoints;
+    }
+
+    public void OnPointerEnter(PointerEventData pointerEventData)
+    {
+        if (!name.Equals("Player"))
+        {
+            //Highlight unit on board
+            GetComponent<SpriteRenderer>().material.SetFloat("_OutlineAlpha", 0.75f);
+            GetComponent<SpriteRenderer>().material.SetColor("_OutlineColor", Color.yellow);
+            FindObjectOfType<TurnController>().hoveredUIUnit = true;
+
+            //Use vision controller to highlight unit movement range
+            if (vc == null) vc = FindObjectOfType<VisionController>();
+            vc.UnitHovered = gameObject;
+            if (unitUI == null) unitUI = FindObjectOfType<UnitUI>();
+            unitUI.unit = this;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        if (!name.Equals("Player"))
+        {
+            GetComponent<SpriteRenderer>().material.SetFloat("_OutlineAlpha", 0f);
+            GetComponent<SpriteRenderer>().material.SetColor("_OutlineColor", Color.green);
+            FindObjectOfType<TurnController>().hoveredUIUnit = false;
+
+            if (vc == null) vc = FindObjectOfType<VisionController>();
+            vc.UnitHovered = null;
+            if (unitUI == null) unitUI = FindObjectOfType<UnitUI>();
+            unitUI.unit = null;
+        }
     }
 }

@@ -13,7 +13,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: Value
-    m_EventTreshold: 3
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -173228063670885957}
   m_Solo: 0
@@ -36,7 +36,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PoisonIndicator1
-  m_Speed: 0.25
+  m_Speed: 0.175
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -67,7 +67,7 @@ AnimatorStateTransition:
     m_EventTreshold: 4
   - m_ConditionMode: 4
     m_ConditionEvent: Value
-    m_EventTreshold: 7
+    m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7930361314531545215}
   m_Solo: 0
@@ -95,7 +95,7 @@ AnimatorStateTransition:
     m_EventTreshold: 2
   - m_ConditionMode: 4
     m_ConditionEvent: Value
-    m_EventTreshold: 5
+    m_EventTreshold: 4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6420323622152148480}
   m_Solo: 0
@@ -118,7 +118,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PoisonIndicator3
-  m_Speed: 0.25
+  m_Speed: 0.175
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -235,7 +235,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Value
-    m_EventTreshold: 7
+    m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2016542821905880214}
   m_Solo: 0
@@ -258,7 +258,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PoisonIndicator2
-  m_Speed: 0.25
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []

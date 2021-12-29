@@ -7,6 +7,8 @@ public class SpellBook : MonoBehaviour
 {
     public List<GameObject> spells;
     public GameObject currentSpell;
+    Unit unit;
+    PlayerUI ui;
 
     public void SelectSpell(int index)
     {
@@ -18,11 +20,18 @@ public class SpellBook : MonoBehaviour
 
     public void CastSpell()
     {
-        if (currentSpell != null)
+        if (unit == null) unit = GetComponent<Unit>();
+        if (ui == null) ui = GetComponent<PlayerUI>();
+        if (currentSpell != null && unit.ManaPointsRemaining > 0)
         {
-            var s = Instantiate(currentSpell, (Vector3)Util.NearestToCursor().position, Quaternion.identity);
-            s.SendMessage("OnCast");
-            currentSpell = null;
+            if (Util.NodesInRange(transform.position, currentSpell.GetComponent<Spell>().castRange).Contains(Util.NearestToCursor()))
+                {
+                unit.ManaPointsRemaining--;
+                var s = Instantiate(currentSpell, (Vector3)Util.NearestToCursor().position, Quaternion.identity);
+                s.SendMessage("OnCast");
+            }
         }
+        ui.UpdateUI();
+        currentSpell = null;
     }
 }

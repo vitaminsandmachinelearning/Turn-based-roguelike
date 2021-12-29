@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wraith_Knife_Idle
+  m_Name: Wolf_Idle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 1879549211, guid: 486e5f4ae33464542aafcddb62dfa7f6, type: 3}
+      value: {fileID: -2104538440, guid: 44a728db23cea9d478f4eacb91f28ebe, type: 3}
     - time: 0.083333336
-      value: {fileID: -1664038236, guid: 486e5f4ae33464542aafcddb62dfa7f6, type: 3}
+      value: {fileID: -54103173, guid: 44a728db23cea9d478f4eacb91f28ebe, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -43,8 +43,8 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
     pptrCurveMapping:
-    - {fileID: 1879549211, guid: 486e5f4ae33464542aafcddb62dfa7f6, type: 3}
-    - {fileID: -1664038236, guid: 486e5f4ae33464542aafcddb62dfa7f6, type: 3}
+    - {fileID: -2104538440, guid: 44a728db23cea9d478f4eacb91f28ebe, type: 3}
+    - {fileID: -54103173, guid: 44a728db23cea9d478f4eacb91f28ebe, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

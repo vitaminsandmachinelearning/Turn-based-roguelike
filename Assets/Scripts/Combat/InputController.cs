@@ -8,7 +8,7 @@ public class InputController : MonoBehaviour
 {
     public bool canInput = true;
     public Vector2 mousePosition;
-    MapController mp;
+    VisionController mp;
     TurnController tc;
     Unit unit;
 
@@ -16,7 +16,7 @@ public class InputController : MonoBehaviour
 
     private void Start()
     {
-        mp = FindObjectOfType<MapController>();
+        mp = FindObjectOfType<VisionController>();
         tc = FindObjectOfType<TurnController>();
         unit = GameObject.Find("Player").GetComponent<Unit>();
     }

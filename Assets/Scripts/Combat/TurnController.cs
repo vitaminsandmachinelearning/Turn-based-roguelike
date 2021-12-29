@@ -31,16 +31,13 @@ public class TurnController : MonoBehaviour
             foreach (Unit u in turnOrder)
             {
                 //Make sure not to run for unit if it died in current loop
-                if (u != null)
+                currentTurn++;
+                if (u.Alive)
                 {
-                    if (u.Alive)
-                    {
-                        currentTurn++;
-                        yield return StartCoroutine(UnitTurn(turnOrder[currentTurn]));
-                    }
+                    GetComponent<TurnOrderUI>().HighlightUnit(u);
+                    yield return StartCoroutine(UnitTurn(turnOrder[currentTurn]));
                 }
             }
-            turnOrder.RemoveAll(x => x == null);
         }
     }
 
@@ -104,8 +101,12 @@ public class TurnController : MonoBehaviour
 
         //Roll initiative for all new units
         foreach (Unit u in units)
+        {
             if (u.Initiative == -1)
                 u.Initiative = Random.Range(0, 20);
+            if (u.name.Equals("Player"))
+                u.Initiative = 21;
+        }
 
         //ORDER ASCENDING BECAUSE TURNS USE LAST UNIT ON LIST
         SortTurnOrder();

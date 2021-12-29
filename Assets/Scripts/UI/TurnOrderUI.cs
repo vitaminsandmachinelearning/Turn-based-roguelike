@@ -15,17 +15,20 @@ public class TurnOrderUI : MonoBehaviour
     [ShowInInspector]
     List<GameObject> turnOrderUIInstances;
 
+    public GameObject turnOrderPointer;
+    public Vector3 turnOrderPointerOffset = new Vector3(0, 8, 0);
+
     Vector3 boxBasePosition = new Vector3(100, 0, 0);
     public int boxLeftOffset = 120;
 
     public void BuildTurnOrderList()
     {
         tc = FindObjectOfType<TurnController>();
-        for (int i = tc.turnOrder.Count() - 1; i > -1; i--)
-            AddTurnOrderBox(tc.turnOrder[i]);
+        for (int i = 0; i < tc.turnOrder.Count(); i++)
+            AddUnit(tc.turnOrder[i]);
     }
 
-    public void AddTurnOrderBox(Unit u)
+    public void AddUnit(Unit u)
     {
         //Create turn order box instance and set as child to turn order panel
         if (turnOrderUIInstances == null)
@@ -35,18 +38,17 @@ public class TurnOrderUI : MonoBehaviour
         turnOrderUIInstances.Last().GetComponentInChildren<TurnOrderUIUnitHolder>().unit = u;
     }
 
-    public void RemoveTurnOrderBox(Unit u)
+    public void RemoveUnit(Unit u)
     {
-        var instance = turnOrderUIInstances.Find(x => x.GetComponentInChildren<TurnOrderUIUnitHolder>().unit == u);
-        Destroy(instance);
-        turnOrderUIInstances.Remove(instance);
+        var instance = turnOrderUIInstances.Find(x => u == x.GetComponentInChildren<TurnOrderUIUnitHolder>().unit);
+        instance.SetActive(false);
     }
 
-    public void MoveToFront(Unit u)
+    public void HighlightUnit(Unit u)
     {
-        var unitObject = turnOrderUIInstances.Find(x => x.GetComponentInChildren<TurnOrderUIUnitHolder>().unit == u);
-        turnOrderUIInstances.Remove(unitObject);
-        turnOrderUIInstances.Insert(0, unitObject);
-        unitObject.transform.SetAsLastSibling();
+        foreach (GameObject go in turnOrderUIInstances)
+            go.transform.localScale = Vector3.one;
+        var instance = turnOrderUIInstances.Find(x => x.GetComponentInChildren<TurnOrderUIUnitHolder>().unit == u);
+        instance.transform.localScale = new Vector3(1.15f, 1.15f, 1.15f);
     }
 }

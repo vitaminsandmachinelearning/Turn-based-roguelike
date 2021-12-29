@@ -6,6 +6,19 @@ Player
 		Level
 		Growth
 
+UI
+	Unit abilities
+	Unit movement range on hover
+	Unit UI
+		show stats on hover
+	Action buttons (Move, spell, etc.)
+	Spellbook
+		Upgrade with runes
+	Player UI
+	change UI for status effects
+		poison -> green hp bar
+		frozen -> frozen border
+
 Enemies
 	Movement
 	Stats
@@ -17,10 +30,6 @@ Gameplay
 	Turns
 		Turn Order UI
 			Make work with new turn system
-		Actions
-			Points
-			Attacks
-			Spells
 
 	Combat
 		Combat start
@@ -49,20 +58,4 @@ Gameplay
 				Split OnHit
 				Split OnCast
 				Damage over distance
-			StatusEffects
-				Shock +x% damage for y turns
-		LightningBolt
 		Delayed falling daggers
-
-UI
-	Player UI
-		change UI for status effects
-			poison -> green hp bar
-			frozen -> frozen border
-	Status Effects
-		Change status indicator icons over units to grow with effect duration/strength
-	Unit stats
-	Unit range on hover
-	Action buttons (Move, spell, etc.)
-	Spellbook
-		Upgrade with runes

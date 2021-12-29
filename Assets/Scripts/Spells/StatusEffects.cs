@@ -23,9 +23,6 @@ public class StatusEffects : MonoBehaviour
     public void UpdateStatusIndicators()
     {
         CheckReferences();
-        Debug.Log("Freeze: " + freezeDuration + " Instance: " + (FrozenIndicatorInstance != null) + "\n" +
-            "Shock: " + shockPercentage + " Instance: " + (ShockIndicatorInstance != null) + "\n" +
-            "Poison: " + PoisonStacks().Count() + " Instance: " + (PoisonIndicatorInstance != null) + "\n");
 
         if (freezeDuration <= 0 && FrozenIndicatorInstance != null)
             Destroy(FrozenIndicatorInstance);
@@ -68,20 +65,12 @@ public class StatusEffects : MonoBehaviour
     
     void UpdateStatusIndicatorPositions()
     {
-        List<GameObject> allIndicators = new List<GameObject>();
-        if (PoisonIndicatorInstance != null) allIndicators.Add(PoisonIndicatorInstance);
-        if (FrozenIndicatorInstance != null) allIndicators.Add(FrozenIndicatorInstance);
-        if (ShockIndicatorInstance != null) allIndicators.Add(ShockIndicatorInstance);
-
-        float indicatorStartPositionX = -0.4f;
-        float spacePerIndicator = Mathf.Abs(indicatorStartPositionX) * 2f / allIndicators.Count();
-        Vector3 currentIndicatorPosition = new Vector3(indicatorStartPositionX, 0, 0);
-
-        for(int i = 0; i < allIndicators.Count; i++)
-        {
-            allIndicators[i].transform.position = transform.position + statusIndicatorOffset + currentIndicatorPosition;
-            currentIndicatorPosition.x += spacePerIndicator;
-        }
+        if (ShockIndicatorInstance != null)
+            ShockIndicatorInstance.transform.position = transform.position + statusIndicatorOffset + new Vector3(-0.4f, 0f, 0);
+        if (PoisonIndicatorInstance != null)
+            PoisonIndicatorInstance.transform.position = transform.position + statusIndicatorOffset;
+        if (FrozenIndicatorInstance != null)
+            FrozenIndicatorInstance.transform.position = transform.position + statusIndicatorOffset + new Vector3(0.4f, 0f, 0);
     }
 
     public void AddPoison(int duration, int damage)
@@ -111,5 +100,17 @@ public class StatusEffects : MonoBehaviour
     void CheckReferences()
     {
         sed = FindObjectOfType<StatusEffectData>();
+    }
+
+    public void OnDie()
+    {
+        if (ShockIndicatorInstance != null)
+            Destroy(ShockIndicatorInstance);
+
+        if (FrozenIndicatorInstance != null)
+            Destroy(FrozenIndicatorInstance);
+
+        if (PoisonIndicatorInstance != null)
+            Destroy(PoisonIndicatorInstance);
     }
 }

@@ -12,6 +12,6 @@ public class UIUpdateCurrentSpell : MonoBehaviour
     }
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = sb.currentSpell != null ? sb.currentSpell.name : "No spell equipped";
+        GetComponent<TextMeshProUGUI>().text = sb.currentSpell != null ? sb.currentSpell.name : "No Spell Equipped";
     }
 }

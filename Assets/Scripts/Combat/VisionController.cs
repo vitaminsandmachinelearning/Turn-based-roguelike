@@ -5,18 +5,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MapController : MonoBehaviour
+public class VisionController : MonoBehaviour
 {
     List<GameObject> activeHighlights;
+    List<GameObject> activeTargetHighlights;
+    List<GameObject> activeUnitMovementHighlights;
+
     public List<GameObject> highlights;
-    public Vector3 offsetFromCharacters;
+
     InputController ic;
     SpellBook sb;
     TurnController tc;
 
+    public GameObject UnitHovered;
+
     private void Start()
     {
         activeHighlights = new List<GameObject>();
+        activeTargetHighlights = new List<GameObject>();
+        activeUnitMovementHighlights = new List<GameObject>();
         ic = FindObjectOfType<InputController>();
         sb = FindObjectOfType<SpellBook>();
         tc = FindObjectOfType<TurnController>();
@@ -36,7 +43,7 @@ public class MapController : MonoBehaviour
         foreach (GraphNode n in nodesInRange)
         { 
             if (n != start && !nodesNearEnemies.Contains(n))
-                activeHighlights.Add(Instantiate(highlights[1], (Vector3)n.position + offsetFromCharacters, Quaternion.identity));
+                activeHighlights.Add(Instantiate(highlights[1], (Vector3)n.position, Quaternion.identity));
         }           
     }
 
@@ -45,6 +52,14 @@ public class MapController : MonoBehaviour
         foreach (GameObject go in activeHighlights)
             Destroy(go);
         activeHighlights.Clear();
+
+        foreach (GameObject go in activeTargetHighlights)
+            Destroy(go);
+        activeTargetHighlights.Clear();
+
+        foreach (GameObject go in activeUnitMovementHighlights)
+            Destroy(go);
+        activeUnitMovementHighlights.Clear();
 
         Unit[] units = FindObjectsOfType<Unit>();
         foreach (Unit u in units)
@@ -56,6 +71,7 @@ public class MapController : MonoBehaviour
     //Highlight targetting
     void Update()
     {
+        //Movement range and spell targetting
         if(!ic.movementRangeHighlighted && sb.currentSpell == null && !tc.hoveredUIUnit)
             ClearHighlighteds();
         if (sb.currentSpell != null)
@@ -66,34 +82,46 @@ public class MapController : MonoBehaviour
             if (sb.currentSpell.GetComponent<AoE>() != null)
                 radius = sb.currentSpell.GetComponent<AoE>().radius;
 
-            List<GraphNode> nodesToHighlight = new List<GraphNode>();
+            List<GraphNode> rangeNodesToHighlight = new List<GraphNode>();
+            List<GraphNode> targetNodesToHighlight = new List<GraphNode>();
+
+            rangeNodesToHighlight = Util.NodesInRange(ic.transform.position, sb.currentSpell.GetComponent<Spell>().castRange);
+
             if (radius > 0)
                 for (int x = -radius; x <= radius; x++)
                     for (int y = -radius; y <= radius; y++)
                     {
                         var n = AstarPath.active.GetNearest(ic.mousePosition + new Vector2(x, y)).node;
-                        nodesToHighlight.Add(n);
+                        targetNodesToHighlight.Add(n);
                     }
             else
-                nodesToHighlight = Util.NodesInRange(ic.mousePosition, radius);
-            nodesToHighlight = nodesToHighlight.Distinct().ToList();
+                targetNodesToHighlight = Util.NodesInRange(ic.mousePosition, radius);
+            targetNodesToHighlight = targetNodesToHighlight.Distinct().ToList();
 
             Unit[] units = FindObjectsOfType<Unit>();
             foreach (Unit u in units)
             {
                 var unitNode = AstarPath.active.GetNearest(u.transform.position).node;
-                if (nodesToHighlight.Contains(unitNode))
+                if (targetNodesToHighlight.Contains(unitNode))
                 {
                     u.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineAlpha", 0.75f);
                     u.GetComponent<SpriteRenderer>().material.SetColor("_OutlineColor", Color.green);
                 }
             }
 
+            foreach (GraphNode n in rangeNodesToHighlight)
+                activeHighlights.Add(Instantiate(highlights[1], (Vector3)n.position, Quaternion.identity));
+            foreach (GraphNode n in targetNodesToHighlight)
+                activeTargetHighlights.Add(Instantiate(highlights[2], (Vector3)n.position, Quaternion.identity));
+        }
 
-            foreach (GraphNode n in nodesToHighlight)
-            {
-                activeHighlights.Add(Instantiate(highlights[1], (Vector3)n.position + offsetFromCharacters, Quaternion.identity));
-            }
+        //Hovered units
+        if (UnitHovered != null && !ic.movementRangeHighlighted && sb.currentSpell == null)
+        {
+            ClearHighlighteds();
+            List<GraphNode> nodesInRangeOfUnit = Util.NodesInRange(UnitHovered.transform.position, UnitHovered.GetComponent<Unit>().MovementPoints);
+            foreach (GraphNode n in nodesInRangeOfUnit)
+                activeUnitMovementHighlights.Add(Instantiate(highlights[3], (Vector3)n.position, Quaternion.identity));
         }
     }
 }
