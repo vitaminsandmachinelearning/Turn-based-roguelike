@@ -14,7 +14,6 @@ public class Damage : MonoBehaviour
 
     void OnHit()
     {
-        Debug.Log("Dealing " + damage + " damage to " + GetComponent<Spell>().target.GetComponent<Unit>().name);
         GetComponent<Spell>().target.GetComponent<Unit>().TakeDamage(damage);
         SendMessage("Finished");
     }

@@ -15,10 +15,8 @@ Gameplay
 		Move units to correct places
 
 	Turns
-		Bugs
-			Turn order artificially delayed for enemies. 
-				When enemy turns implemented remove turndelay in enemy.cs and turndelay parameter in statuseffects.cs > transformback
-			Fix turn order and turn order ui to deal with units moving in and out of turn order lists.
+		Turn Order UI
+			Make work with new turn system
 		Actions
 			Points
 			Attacks
@@ -27,7 +25,7 @@ Gameplay
 	Combat
 		Combat start
 			Effects
-		Damage and health
+		Death
 		Combat end
 			Effects
 			Rewards
@@ -57,6 +55,12 @@ Gameplay
 		Delayed falling daggers
 
 UI
+	Player UI
+		change UI for status effects
+			poison -> green hp bar
+			frozen -> frozen border
+	Status Effects
+		Change status indicator icons over units to grow with effect duration/strength
 	Unit stats
 	Unit range on hover
 	Action buttons (Move, spell, etc.)

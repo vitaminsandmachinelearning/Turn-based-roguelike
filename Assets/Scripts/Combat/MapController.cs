@@ -14,10 +14,6 @@ public class MapController : MonoBehaviour
     SpellBook sb;
     TurnController tc;
 
-    public GameObject FrozenIndicator;
-    public GameObject PoisonIndicator;
-    public GameObject TransformIndicator;
-
     private void Start()
     {
         activeHighlights = new List<GameObject>();

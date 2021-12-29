@@ -256,7 +256,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_6
+      name: PoisonSpikes0
       rect:
         serializedVersion: 2
         x: 0
@@ -277,7 +277,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_7
+      name: PoisonSpikes1
       rect:
         serializedVersion: 2
         x: 16
@@ -298,7 +298,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_8
+      name: PoisonSpikes2
       rect:
         serializedVersion: 2
         x: 32
@@ -319,7 +319,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_9
+      name: PoisonSpikes3
       rect:
         serializedVersion: 2
         x: 48
@@ -516,7 +516,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -537,7 +537,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -558,7 +558,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -579,7 +579,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -600,7 +600,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -608,6 +608,216 @@ TextureImporter:
       bones: []
       spriteID: 7d25f1483f5d1454298539be7a258b57
       internalID: -11843451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Empty
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d15dbdc3b4f63fd4e9097e200c100261
+      internalID: -1174373820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 375e36b2eea79724d821aa0ec431714b
+      internalID: 1298193668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_24
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f047e1c6991031247ae799bf1e06ea54
+      internalID: -1723192752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ec98e0938575e148ab4895b4e4398da
+      internalID: 1100048776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_26
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3aceb2e6f074924ab4bce8f5d03e981
+      internalID: 1774915370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_27
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b099e3ac7da50a6439ab35f0ba877440
+      internalID: -471413436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PoisonSpikes4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a511ef1c0c1737b4582a8c9bf06bc954
+      internalID: -2111337620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PoisonSpikes5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3535a14b3d2db854cbf80bc1e8029f6d
+      internalID: 1992702726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PoisonSpikes6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 076cf5efa6859f64f813cf1094a46337
+      internalID: 1327264048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PoisonSpikes7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9b8a2e19b3f3f948a783025526f72cb
+      internalID: -431943061
       vertices: []
       indices: 
       edges: []
@@ -624,28 +834,38 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       atlas - spells_1: 85226093
+      PoisonSpikes4: -2111337620
+      Empty: -1174373820
       atlas - spells_17: 1155194476
-      atlas - spells_7: -689568680
+      PoisonSpikes5: 1992702726
+      PoisonSpikes7: -431943061
       atlas - spells_12: -2064379538
       atlas - spells_10: -591130949
-      atlas - spells_8: 215117983
+      PoisonSpikes1: -689568680
+      atlas - spells_25: 1100048776
+      atlas - spells_27: -471413436
       atlas - spells_14: 1705564159
       atlas - spells_21: -295655107
+      PoisonSpikes3: 2081631917
       atlas - spells_2: 1063926375
       atlas - spells_19: 1632876471
+      atlas - spells_26: 1774915370
       atlas - spells_15: -1543892635
-      atlas - spells_9: 2081631917
       atlas - spells_18: 1031887777
+      PoisonSpikes2: 215117983
       atlas - spells_3: 1812838739
       atlas - spells_20: -1744027006
       atlas - spells_22: -11843451
+      atlas - spells_24: -1723192752
+      PoisonSpikes6: 1327264048
       atlas - spells_5: -341291386
       atlas - spells_4: 1360320909
-      atlas - spells_6: 134639481
+      atlas - spells_23: 1298193668
       atlas - spells_11: 815184928
       atlas - spells_0: -670399684
       atlas - spells_13: -890226353
       atlas - spells_16: 442052794
+      PoisonSpikes0: 134639481
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

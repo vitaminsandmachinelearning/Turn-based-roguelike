@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7395028522989399912}
   - component: {fileID: 7395028522989399915}
   - component: {fileID: 7395028522989399919}
+  - component: {fileID: 6640817235475312196}
   - component: {fileID: 7395028522989399918}
   m_Layer: 0
   m_Name: Freeze
@@ -121,6 +122,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   targetType: 1
+  castRange: 0
+--- !u!114 &6640817235475312196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7395028522989399914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622c90e8abbd610449416c2fcc498ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
 --- !u!114 &7395028522989399918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,4 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poisonDuration: 0
   poisonDamage: 0
-  freezeDuration: 2
+  freezeDuration: 1
+  shockDuration: 0
+  shockPercentage: 0

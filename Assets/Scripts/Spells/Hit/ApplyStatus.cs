@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ApplyStatus : MonoBehaviour
 {
-    public int poisonDuration;
-    public int poisonDamage;
-    public int freezeDuration;
+    public int poisonDuration = 0;
+    public int poisonDamage = 0;
+    public int freezeDuration = 0;
+    public int shockPercentage = 0;
 
     private void Awake()
     {
@@ -15,14 +16,17 @@ public class ApplyStatus : MonoBehaviour
 
     void OnHit()
     {
-        Debug.Log("Applying status to " + GetComponent<Spell>().target.GetComponent<Unit>().name);
-        StatusEffects s;
-        if (GetComponent<Spell>().target.GetComponent<StatusEffects>() == null)
-            s = GetComponent<Spell>().target.AddComponent<StatusEffects>();
-        else
-            s = GetComponent<Spell>().target.GetComponent<StatusEffects>();
-        if (poisonDuration > 0) s.AddPoison(poisonDuration, poisonDamage);
-        if (freezeDuration > 0) s.ApplyFreeze(freezeDuration);
+        if (GetComponent<Spell>().target.GetComponent<Unit>().Alive)
+        {
+            StatusEffects s;
+            if (GetComponent<Spell>().target.GetComponent<StatusEffects>() == null)
+                s = GetComponent<Spell>().target.AddComponent<StatusEffects>();
+            else
+                s = GetComponent<Spell>().target.GetComponent<StatusEffects>();
+            if (poisonDuration > 0) s.AddPoison(poisonDuration, poisonDamage);
+            if (freezeDuration > 0) s.ApplyFreeze(freezeDuration);
+            if (shockPercentage > 0) s.ApplyShock(shockPercentage);
+        }
         SendMessage("Finished");
     }
 }

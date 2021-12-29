@@ -26,7 +26,7 @@ public class InputController : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (canInput)
         {
-            if (unit.ActiveTurn)
+            if (unit.processingTurnActions)
             {
                 //Movement controls
                 if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -62,7 +62,7 @@ public class InputController : MonoBehaviour
                 //Turn controls
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    unit.ActiveTurn = false;
+                    unit.processingTurnActions = false;
                 }
             }
             //Interface controls

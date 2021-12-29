@@ -43,18 +43,6 @@ public class Propagate : MonoBehaviour
         if (previous != null)
             potentialUnits.Remove(previous);
 
-        //Can't target previously transformed units if transforming
-        if (GetComponent<TransformUnit>() != null)
-        {
-            List<Unit> transformed = new List<Unit>();
-            foreach (Unit u in potentialUnits)
-                if (u.GetComponent<StatusEffects>() != null)
-                    if (u.GetComponent<StatusEffects>().transformed != null)
-                        transformed.Add(u);
-
-            potentialUnits.RemoveAll(x => transformed.Contains(x));
-        }
-
         //Can't target current target again
         potentialUnits.Remove(GetComponent<Spell>().target.GetComponent<Unit>());
 

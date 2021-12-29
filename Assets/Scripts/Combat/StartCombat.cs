@@ -11,6 +11,6 @@ public class StartCombat : MonoBehaviour
     {
         units = FindObjectsOfType<Unit>();
         tc = GetComponent<TurnController>();
-        tc.DEBUG_STARTCOMBAT();
+        tc.StartCombat();
     }
 }
