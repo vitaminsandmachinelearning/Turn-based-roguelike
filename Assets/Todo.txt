@@ -8,28 +8,20 @@ Player
 
 UI
 	Unit abilities
-	Unit movement range on hover
-	Unit UI
-		show stats on hover
 	Action buttons (Move, spell, etc.)
 	Spellbook
 		Upgrade with runes
 	Player UI
-	change UI for status effects
-		poison -> green hp bar
-		frozen -> frozen border
+		change UI for status effects
+			poison -> green hp bar
+			frozen -> frozen border
 
 Enemies
 	Movement
-	Stats
 
 Gameplay
 	Load in to map
 		Move units to correct places
-
-	Turns
-		Turn Order UI
-			Make work with new turn system
 
 	Combat
 		Combat start
