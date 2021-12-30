@@ -1,4 +1,3 @@
-using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +80,7 @@ public class TurnController : MonoBehaviour
             if (s.PoisonStacks().Count > 0)
                 foreach (int[] p in s.PoisonStacks())
                 {
-                    u.TakeDamage(p[1]);
+                    u.TakeDamage(p[1], DamageType.Poison);
                     p[0]--;
                 }
             s.UpdateStatusIndicators();

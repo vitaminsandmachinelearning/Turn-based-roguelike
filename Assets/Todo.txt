@@ -1,10 +1,18 @@
 Player
 	Runes
+		Rune inventory
+		Rune slots in spells
+		Upgrade to next tier 
 	Spell book
 	Stats
 	XP
 		Level
 		Growth
+	Types of mana
+		Physical
+		Ice
+		Lightning
+		Poison
 
 UI
 	Unit abilities
@@ -16,8 +24,50 @@ UI
 			poison -> green hp bar
 			frozen -> frozen border
 
+Items
+	Item holder
+	Item effects
+		Turn start
+		Turn end
+		OnHit
+		OnCast
+		Damage type effects
+
+Spells
+	Modifications
+		Projectile
+			Split OnHit
+			Split OnCast
+			Damage over distance
+	Delayed falling daggers
+	Movement skills
+		Push
+		Pull
+		Teleport
+	Shatter
+		Remove frozen
+		Effect per x duration
+	Ground
+		Remove shock
+		Effect per x percent
+	Purge
+		Remove poison
+		Effect per x damage/duration
+	Post-Shatter/Ground/Purge effects
+		Damage per X
+		Player health per X
+		Movement per X?
+
 Enemies
+	More enemies
+	Abilities
 	Movement
+	Bosses
+		Large sprite over multiple map nodes.
+			1x1 objects with SingleNodeBlocker.cs on for each node covered.
+		All small objects refer to single central object with Unit.cs.
+			Spells all focused on central object.
+				Only 1 instance of each spell can hit boss per cast. 
 
 Gameplay
 	Load in to map
@@ -44,10 +94,4 @@ Gameplay
 				shops
 				gamble rooms
 
-	Spells
-		Modifications
-			Projectile
-				Split OnHit
-				Split OnCast
-				Damage over distance
-		Delayed falling daggers
+	

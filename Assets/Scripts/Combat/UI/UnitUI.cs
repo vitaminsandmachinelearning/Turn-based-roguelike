@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class UnitUI : MonoBehaviour
 {
+    public GameObject UnitPanel;
+
     public TextMeshProUGUI HealthText;
     public Transform HealthBarImage;
 
@@ -31,6 +33,7 @@ public class UnitUI : MonoBehaviour
         {
             if (!unit.name.Equals("Player"))
             {
+                UnitPanel.SetActive(true);
                 HealthText.text = unit.Health + "/" + unit.MaxHealth;
                 Vector3 healthBarScale = new Vector3(Mathf.Clamp(unit.Health / (float)unit.MaxHealth, 0f, 1f), 1, 1);
                 HealthBarImage.localScale = healthBarScale;
@@ -82,6 +85,7 @@ public class UnitUI : MonoBehaviour
             }
             else
             {
+                UnitPanel.SetActive(false);
                 HealthText.text = "";
                 Vector3 healthBarScale = new Vector3(0f, 0f, 0f);
                 HealthBarImage.localScale = healthBarScale;

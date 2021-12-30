@@ -14,6 +14,11 @@ GameObject:
   - component: {fileID: 5785223030940690016}
   - component: {fileID: 5785223030940690031}
   - component: {fileID: -3802805396332445462}
+  - component: {fileID: 5957004493910340027}
+  - component: {fileID: 3552382661965167111}
+  - component: {fileID: -9001706160796039323}
+  - component: {fileID: -3601828444406850280}
+  - component: {fileID: -9108524316915958028}
   m_Layer: 0
   m_Name: Lightning Bolt
   m_TagString: Untagged
@@ -136,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 4
+  damageType: 1
 --- !u!114 &-3802805396332445462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +154,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4731e36455c37aa4c9dfec2621704fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poisonDuration: 0
-  poisonDamage: 0
-  freezeDuration: 0
+  poisonDuration: 1
+  poisonDamage: 1
+  freezeDuration: 1
   shockPercentage: 25
+--- !u!114 &5957004493910340027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785223030940690027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8715c6d44ef9a1345aa78568a199bbe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3552382661965167111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785223030940690027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a263848c8062e64282d295423f1dd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-9001706160796039323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785223030940690027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55431ad48ad9ca949ad356cd1d8ee240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3601828444406850280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785223030940690027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f808cb786163b5b4eb28f1071e151288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1
+--- !u!114 &-9108524316915958028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785223030940690027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485471d455d5ce24ea1b1c722dbfecad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previous: {fileID: 0}
+  currentPropagations: 0
+  maxPropagations: 3
+  propagationDelay: 0

@@ -1,20 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts;
 using Pathfinding;
 using System.Linq;
+using UnityEngine.Assertions;
 
-public class AoE : MonoBehaviour
+public class AoE : SpellComponent
 {
     public int radius;
 
-    private void Awake()
-    {
-        SendMessage("Register");
-    }
+    public override EffectPriority Getpriority(){ return EffectPriority.PostCast; }
 
-    void OnPostCast()
+    public override IEnumerator Effect()
     {
         if (radius > 0 && GetComponent<Spell>().targetType != TargetType.Position)
             if (GetComponent<Propagate>() != null)
@@ -24,7 +21,7 @@ public class AoE : MonoBehaviour
             }
             else
                 CastInAoe();
-        SendMessage("Finished");
+        yield return null;
     }
 
     void CastInAoe()
@@ -48,8 +45,8 @@ public class AoE : MonoBehaviour
             if (nodesInRadius.Contains(n))
             {
                 var o = Instantiate(gameObject, (Vector3)n.position, Quaternion.identity);
+                o.GetComponent<Spell>().target = null;
                 o.GetComponent<Spell>().targetType = TargetType.Position;
-                o.SendMessage("OnCast");
             }
         }
     }

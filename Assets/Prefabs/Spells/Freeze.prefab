@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  damageType: 2
 --- !u!114 &7395028522989399918
 MonoBehaviour:
   m_ObjectHideFlags: 0

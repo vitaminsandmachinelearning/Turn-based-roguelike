@@ -1,0 +1,124 @@
+
+Spells
+	Components
+		Spell.cs
+			Base spell component. Required for spell to function.
+			Targetting.
+
+		AoE.cs
+			Casts spell in area of effect around initial cast. 
+			Area of effect radius defined by -Radius-. 
+			Must have -Radius- value of at least 1.
+
+		Damage.cs
+			Must have damage type set.
+			Calls /TakeDamage/ on target unit. Target pulled from Spell.cs.
+			Negative damage values will restore health to targetted unit. 
+			Contains DamageType enum.
+
+		ApplyStatus.cs
+			Applies Status Effects. If unit already has a <StatusEffects> instance, adds to that instance.
+			Applies frozen if -freezeDuration- > 0.
+			Applies shocked if -shockPercentage- > 0.
+			Adds poison stack if -poisonDuration- > 0 AND -poisonDamage- > 0
+		
+		Propagate.cs
+			Bounces spell to adjacent unit -maxPropagations- times.
+			Can delay propagation using -propagationDelay- float. Time in seconds.
+			Process
+				If currentPropagations < maxPropagations:
+					Get list of all orthagonally adjacent units. <LIST>
+					If -Previous- is NOT null:
+						Remove -Previous- unit from <LIST>.
+					Remove current target from <LIST>.
+					If <LIST> contains at least 1 unit:
+						Wait for -propagationDelay- seconds. //Can be 0
+						Choose random target from <LIST>.
+						Instantiate copy of spell on chosen target's position. <INSTANCE>
+						Set -Previous- on <INSTANCE> to current target.
+						Set -currentPropagations- on <INSTANCE> to currentValue + 1.
+						Set -targetType- from Spell.cs on <INSTANCE> to Propagated.
+						Send "OnCast" message to <INSTANCE>.						
+						
+		Shatter.cs
+			Removes all frozenDuration from target and applies effect proportional to removed duration.
+
+		Ground.cs
+			Removes all shockPercentage from target and applies effect proportional to removed percentage.
+
+		Purge.cs
+			Removes all poison stacks from target and applies effect proportional to removed stacks.
+
+
+	Create spell:
+		Must have Spell.cs and at least one other spell component.
+
+		Animation:
+			Animation must have empty frame on end.
+			Animation must have SpellAnimationEnded.cs attached. 
+			Animation must have Finished bool defaulted to false.
+
+Units
+	Create unit:
+		Name must be unique.
+		Must have BoxCollider2D for On-Hover UI.
+		Must have Enemy material.
+
+		Unit.cs
+			Must have at least 1 MaxHealth.
+			Must have Unit Icon.
+			Must start with Alive set to true.
+			Must start with Processing Turn Action set to false.
+			Contains logic for:
+				Taking damage
+				Resetting stats
+				Death
+				On-Hover UI effects
+
+		SingleNodeBlocker.cs 
+			Add blocker to block manager so unit cannot be walked through.
+
+		TurnBasedMovementAI.cs (Requires SingleNodeBlocker.cs)
+			Movement script. 
+			Sends "StartedMoving" and "FinishedMoving" messages.
+
+		Enemy.cs (Optional)
+			Defines unit as an enemy.
+			Controls enemy AI.
+			Must have SpellPrefab assigned.
+
+		AddAllIn1Shader.cs (Optional) (Requires SetAtlasUVS.cs)
+			Adds shader functions.
+			Must click Sprite Atlas Auto Setup.
+
+		SetAtlasUVS.cs (Optional) (Requires AddAllIn1Shader.cs)
+			Enables shader functions for atlas-based sprites
+			
+Damage Types
+	Physical
+		Higher base damage spells
+
+	Ice
+		Medium base damage spells
+
+	Lightning
+		Low base damage spells
+		Scales with -ShockPercentage-
+	
+	Poison
+		No base damage spells
+		Deals damage with stacks of the Poison status effect.
+		
+
+Status effects
+	Frozen
+		Unit can't act for -FreezeDuration- turns.
+
+	Shock
+		Unit takes percentage increased lightning damage. Percentage defined by -ShockPercentage-
+
+	Poison
+		Unit takes damage equal to total damage of all poison stacks with a duration of at least 1.
+		Poison stacks are formatted as int[duration, damage].
+		Infinite amount of stacks can be applied. 
+		Stacks have duration in turns.

@@ -1,4 +1,3 @@
-using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,10 +24,9 @@ public class SpellBook : MonoBehaviour
         if (currentSpell != null && unit.ManaPointsRemaining > 0)
         {
             if (Util.NodesInRange(transform.position, currentSpell.GetComponent<Spell>().castRange).Contains(Util.NearestToCursor()))
-                {
+            {
                 unit.ManaPointsRemaining--;
                 var s = Instantiate(currentSpell, (Vector3)Util.NearestToCursor().position, Quaternion.identity);
-                s.SendMessage("OnCast");
             }
         }
         ui.UpdateUI();

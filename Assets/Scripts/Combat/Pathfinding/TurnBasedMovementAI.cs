@@ -52,6 +52,7 @@ public class TurnBasedMovementAI : VersionedMonoBehaviour
                 yield return null;
             }
         }
+        GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
         SendMessage("FinishedMoving");
 	}
 }

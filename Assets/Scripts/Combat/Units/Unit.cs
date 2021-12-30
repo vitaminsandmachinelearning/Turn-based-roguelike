@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Unit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public int MaxHealth;
-    public int Health;
+    public int MaxHealth = 10;
+    public int Health = 10;
     public bool Alive = true;
     public int Initiative = -1;
     public int MovementPointsCap = 5;
@@ -21,15 +21,28 @@ public class Unit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     VisionController vc;
     UnitUI unitUI;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, DamageType damageType)
     {
         if (Alive)
         {
             if (GetComponent<StatusEffects>() != null)
             {
                 StatusEffects s = GetComponent<StatusEffects>();
-                if (s.shockPercentage > 0)
-                    damage = (int)(damage * (1f + s.shockPercentage / 100f));
+                switch (damageType)
+                {
+                    case DamageType.Physical:
+                        break;
+                    case DamageType.Lightning:
+                        if(s.shockPercentage > 0)
+                            damage = (int)(damage * (1f + s.shockPercentage / 100f));
+                        break;
+                    case DamageType.Ice:
+                        if (s.freezeDuration > 0)
+                            damage *= 2;
+                        break;
+                    case DamageType.Poison:
+                        break;
+                }
             }
             Health -= damage;
             if (Health <= 0)
