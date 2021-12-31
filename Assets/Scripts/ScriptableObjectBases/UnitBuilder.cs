@@ -32,16 +32,10 @@ public static class UnitBuilder
             enemy.spell = baseUnit.baseSpell;
         }
 
-        SingleNodeBlocker snb = unitObject.AddComponent<SingleNodeBlocker>();
-
-        TurnBasedMovementAI tbm = unitObject.AddComponent<TurnBasedMovementAI>();
-        tbm.movementSpeed = baseUnit.movementSpeed;
-
         BoxCollider2D box = unitObject.AddComponent<BoxCollider2D>();
 
         AllIn1Shader a1s = unitObject.AddComponent<AllIn1Shader>();
         SetAtlasUvs auv = unitObject.AddComponent<SetAtlasUvs>();
-        auv.UpdateEveryFrame(true);
 
         return unitObject;
     }

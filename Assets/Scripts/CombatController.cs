@@ -10,12 +10,6 @@ public class CombatController : MonoBehaviour
     Unit[] units;
     TurnController tc;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-            Initiate();
-    }
-
     void Initiate()
     {
         SpawnUnits();

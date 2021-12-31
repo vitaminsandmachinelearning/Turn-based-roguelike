@@ -18,9 +18,6 @@ public class MapGraph : MonoBehaviour
 
     List<MapNode> blockedNodes = new List<MapNode>();
 
-    public GameObject nodeHighlight;
-    public List<Sprite> nodeHighlights;
-
     void Generate()
     {
         nodes = new MapNode[Size.x, Size.y];
@@ -77,8 +74,8 @@ public class MapGraph : MonoBehaviour
         LatestPath = null;
 
         // Create open list containing only start node
-        open = new List<MapNode>{ start };
-        closed = new List<MapNode>();
+        List<MapNode> open = new List<MapNode>{ start };
+        List<MapNode> closed = new List<MapNode>();
 
         // Set default g, f values and resetting previousInSearch to null
         // g: cost of path from start to current node
