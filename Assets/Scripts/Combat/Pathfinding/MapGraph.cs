@@ -1,20 +1,25 @@
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
-using Sirenix.Utilities.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
+using System.IO;
 
 public class MapGraph : MonoBehaviour
 {
-    [BoxGroup("Generate Map")] 
+    [BoxGroup("Map")] 
     public int2 StartPosition, Size;
 
-    [BoxGroup("Generate Map")] 
+    [BoxGroup("Map")] 
     public MapNode[,] nodes;
+
+    public MapPath LatestPath;
+
+    List<MapNode> blockedNodes = new List<MapNode>();
+
+    public GameObject nodeHighlight;
+    public List<Sprite> nodeHighlights;
 
     void Generate()
     {
@@ -28,11 +33,13 @@ public class MapGraph : MonoBehaviour
 
     void BlockNode(MapNode node)
     {
+        blockedNodes.Add(node);
         node.blocked = true;
     }
 
     void UnblockNode(MapNode node)
     {
+        blockedNodes.Remove(node);
         node.blocked = false;
     }
 
@@ -67,65 +74,90 @@ public class MapGraph : MonoBehaviour
 
     IEnumerator FindPathWithNodes(MapNode start, MapNode goal)
     {
-        float distanceToGoal = Vector2.Distance(start.position, goal.position);
-
-        // Reset pathfinding values
-        foreach (MapNode node in nodes)
-        {
-            node.visitedInSearch = false;
-            node.previousInSearch = null;
-        }
         LatestPath = null;
 
-        // Start pathing
-        Debug.Log("Started pathing.");
-        List<MapNode> queue = new List<MapNode>();
-        queue.Add(start);
-        MapNode current;
+        // Create open list containing only start node
+        open = new List<MapNode>{ start };
+        closed = new List<MapNode>();
 
-        // While items are in the queue, search for goal
-        while (queue.Count() > 0)
+        // Set default g, f values and resetting previousInSearch to null
+        // g: cost of path from start to current node
+        // f: approximate cost of path from start node to goal node via current node [f = g + h]
+        // h: value returned by heuristic algorithm, approximate cost of path from current node to goal node
+        foreach (MapNode node in nodes)
         {
-            current = queue.Last();
-            queue.Remove(current);
-            current.visitedInSearch = true;
-            Debug.Log("Current node: " + current.ToString());
-            if (current.Equals(goal))
-                LatestPath = WalkBackPath(current);
-            // If current isn't goal, get all unvisited neighbors, add them to the queue if not blocked
-            else
-            {
-                List<MapNode> neighbors = GetNeighbors(current);
-                Debug.Log("Neighbors found: " + neighbors.Count());
-                Debug.Log("Removed " + neighbors.RemoveAll(x => x.visitedInSearch));
-                foreach (MapNode node in neighbors)
-                {
-                    Debug.Log(string.Format("Checking node: {0}\nVisited: {1}\nBlocked: {2}", node.ToString(), node.visitedInSearch, node.blocked));
-                    node.previousInSearch = current;
-                    node.visitedInSearch = true;
-                    if (node.Equals(goal))
-                    {
-                        LatestPath = WalkBackPath(node);
-                        break;
-                    }
-                    else if (!node.blocked)
-                        queue.Add(node);
-                }
-            }
-            if (LatestPath != null)
-                break;
-            yield return null;
+            node.g = 1000f;
+            node.h = GetHeuristicValue(node, goal);
+            node.f = node.g + node.h;
+            node.previousInSearch = null;
         }
-        Debug.Log("Finished Pathing. Path: " + LatestPath);
+        start.g = 0;
+        start.f = GetHeuristicValue(start, goal);
+
+        //Create current with value of start node
+        MapNode current = null;
+
+        while (open.Count() > 0)
+        {
+            //Sort open list by f value and set current to lowest f value node
+            foreach (MapNode node in open)
+                node.f = node.g + GetHeuristicValue(node, goal);
+            current = open[0];
+            for (int i = 0; i < open.Count(); i++)
+                if (open[i].f < current.f)
+                    current = open[i];
+
+            //If goal is found, break
+            if (current.Equals(goal))
+            {
+                LatestPath = WalkBackPath(current);
+                yield break;
+            }
+
+            //Remove current from open list as it has been searched
+            open.Remove(current);
+            closed.Add(current);
+
+            List<MapNode> neighbors = GetNeighbors(current);
+
+            //Check each neighbor
+            foreach (MapNode node in neighbors)
+            {
+                node.timesChecked++;
+                if (node.Equals(goal))
+                {
+                    node.previousInSearch = current;
+                    LatestPath = WalkBackPath(node);
+                    yield break;
+                }
+                if (closed.Contains(node))
+                    continue;
+                if (open.Contains(node))
+                {
+                    if (node.g < current.g + GetHeuristicValue(current, node))
+                        continue;
+                }
+                else
+                    open.Add(node);
+                node.previousInSearch = current;
+                node.g = current.g + GetHeuristicValue(current, node);
+                node.h = GetHeuristicValue(node, goal);
+                node.f = node.g + node.h;
+                yield return null;
+            }
+        }
+    }
+
+    float GetHeuristicValue(MapNode a, MapNode b)
+    {
+        return Mathf.Abs(a.position.x - b.position.x) + Mathf.Abs(a.position.y - b.position.y); 
     }
 
     MapPath WalkBackPath(MapNode node)
     {
         MapPath path = new MapPath();
         path.Add(node);
-        int count = 0;
-        int maxLength = 100;
-        while (node.previousInSearch != null && count < maxLength)
+        while (node.previousInSearch != null)
         {
             node = node.previousInSearch;
             path.Insert(0, node);
@@ -133,68 +165,40 @@ public class MapGraph : MonoBehaviour
         return path;
     }
 
-    private void Update()
+    //Debugging
+
+    IEnumerator ExportMapAsCSV()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
-            Generate();
-        if (Input.GetKeyDown(KeyCode.F2))
-            StartCoroutine(FindPathWithPositions(PathStart, PathEnd));
-    }
+        string filePath = Application.persistentDataPath + "/output.csv";
 
-    /// EDITOR
-#if UNITY_EDITOR
+        if (File.Exists(filePath))
+            File.Delete(filePath);
 
-    [BoxGroup("Pathfinding")] 
-    public Vector2 PathStart, PathEnd;
+        var output = File.CreateText(filePath);
 
-    [ShowInInspector, BoxGroup("Pathfinding")] 
-    public static MapPath LatestPath;
+        string outputText = "A,";
 
+        for (int i = 0; i < nodes.GetLength(0); i++)
+            outputText += "x:" + (i - 5) + ",";
+        outputText += "\n";
 
-    [BoxGroup("Generate Map"), ShowInInspector]
-    List<MapNode> nodesToBlock = new List<MapNode>();
-
-    [BoxGroup("Generate Map"), Button("Block Nodes")]
-    void BlockNodes()
-    {
-        foreach (MapNode node in nodesToBlock)
-            node.blocked = true;
-    }
-
-    /// GIZMOS
-
-    private void OnDrawGizmosSelected()
-    {
-        if (nodes != null)
+        for (int j = nodes.GetLength(1) - 1; j > -1; j--) 
         {
-            Gizmos.color = Color.white;
-            foreach (MapNode node in nodes)
-                Gizmos.DrawCube(node.position, new Vector3(0.5f, 0.5f, 0.5f));
-        }
-        if (LatestPath != null)
-        {
-            Gizmos.color = Color.green;
-            for (int i = 1; i < LatestPath.Length(); i++)
-                Gizmos.DrawLine(LatestPath.path[i].position, LatestPath.path[i - 1].position);
+            for (int i = 0; i < nodes.GetLength(0); i++)
+            {
+                if (i == 0)
+                    outputText += "y:" + (j - 3) + ",";
+                outputText += nodes[i, j].timesChecked + ",";
+            }
+            outputText += "\n";
         }
 
-        if (LatestPath != null)
-            foreach (MapNode node in LatestPath.path)
-                Gizmos.DrawSphere(node.position, 0.5f);
-    }
+        output.Write(outputText);
 
-    /// ODIN METHODS
+        output.Close();
 
-    static MapNode DrawNodes(Rect rect, MapNode node)
-    {
-        Color rectColor = Color.grey;
-        rectColor = node.blocked ? Color.red : Color.grey;
-        rectColor = node.visitedInSearch ? Color.blue : rectColor;
-        if (LatestPath != null)
-            rectColor = LatestPath.Contains(node) ? Color.green : rectColor;
-        UnityEditor.EditorGUI.DrawRect(rect.Padding(1), rectColor);
-        return node;
+        Debug.Log("Writing to " + filePath);
+        yield return new WaitForSeconds(1f);
+        Application.OpenURL(filePath);
     }
-    
-    #endif
 }

@@ -3,10 +3,19 @@ using UnityEngine;
 
 public class MapNode
 {
+    //Values
     public Vector2 position = Vector2.zero;
     public bool blocked = false;
-    public bool visitedInSearch = false;
+
+    //Pathfinding
+    public float h;
+    public float g;
+    public float f;
     public MapNode previousInSearch;
+
+    //Debugging
+    public int timesChecked = 0;
+    public GameObject nodeHighlight;
 
     public MapNode()
     {
@@ -32,5 +41,11 @@ public class MapNode
     public override string ToString()
     {
         return string.Format("({0},{1})", position.x, position.y);
+    }
+
+    public void SetHighlight(Sprite sprite)
+    {
+        nodeHighlight.GetComponent<SpriteRenderer>().sprite = sprite;
+        nodeHighlight.transform.position = position;
     }
 }
