@@ -7,17 +7,21 @@ public class InputController : MonoBehaviour
 {
     public bool canInput = true;
     public Vector2 mousePosition;
-    VisionController mp;
+    VisionController vc;
     TurnController tc;
+    SpellBook sb;
     Unit unit;
+    UnitUI unitUI;
 
     public bool movementRangeHighlighted = false;
 
     private void Start()
     {
-        mp = FindObjectOfType<VisionController>();
+        vc = FindObjectOfType<VisionController>();
         tc = FindObjectOfType<TurnController>();
+        sb = FindObjectOfType<SpellBook>();
         unit = GameObject.Find("Player").GetComponent<Unit>();
+        unitUI = FindObjectOfType<UnitUI>();
     }
 
     private void Update()
@@ -30,47 +34,47 @@ public class InputController : MonoBehaviour
                 //Movement controls
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    FindObjectOfType<SpellBook>().currentSpell = null;
+                    DeselectSpell();
                     movementRangeHighlighted = true;
-                    mp.HighlightMovementRange(unit.transform.position, unit.MovementPointsRemaining);
+                    vc.HighlightMovementRange(unit.transform.position, unit.MovementPointsRemaining);
                 }
                 if (Input.GetMouseButtonDown(0) && movementRangeHighlighted)
-                {
                     StartMovement();
-                }
 
                 //casting controls
                 if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    GetComponent<SpellBook>().SelectSpell(0);
-                }
+                    if(unit.ManaPointsRemaining > 0)
+                        GetComponent<SpellBook>().SelectSpell(0);
                 if (Input.GetKeyDown(KeyCode.Alpha3))
-                {
-                    GetComponent<SpellBook>().SelectSpell(1);
-                }
+                    if (unit.ManaPointsRemaining > 0)
+                        GetComponent<SpellBook>().SelectSpell(1);
                 if (Input.GetKeyDown(KeyCode.Alpha4))
-                {
-                    GetComponent<SpellBook>().SelectSpell(2);
-                }
+                    if (unit.ManaPointsRemaining > 0)
+                        GetComponent<SpellBook>().SelectSpell(2);
                 if (Input.GetMouseButtonDown(0) && !movementRangeHighlighted)
-                {
                     if (GetComponent<SpellBook>().currentSpell != null)
                         GetComponent<SpellBook>().CastSpell();
-                }
 
                 //Turn controls
                 if (Input.GetKeyDown(KeyCode.Space))
-                {
                     unit.processingTurnActions = false;
-                }
             }
             //Interface controls
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
-            {
-                FindObjectOfType<SpellBook>().currentSpell = null;
-                movementRangeHighlighted = false;
-            }
+                DeselectAll();
         }
+    }
+
+    void DeselectSpell()
+    {
+        sb.DeselectSpell();
+    }
+    void DeselectAll()
+    {
+        DeselectSpell();
+        movementRangeHighlighted = false;
+        unitUI.UnitPanel.SetActive(false);
+        vc.UnitSelected = null;
     }
 
     void StartMovement()

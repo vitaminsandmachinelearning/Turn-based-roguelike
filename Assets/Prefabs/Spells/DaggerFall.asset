@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d63a67842ce7049aa9eb5d5614ac1a, type: 3}
+  m_Name: DaggerFall
+  m_EditorClassIdentifier: 
+  Name: Dagger Fall
+  icon: {fileID: 1698988199, guid: b41dace29c53dec4788c7be614289d82, type: 3}
+  animatorController: {fileID: 9100000, guid: 2964824ca6e6a78409174c78692f7dd2, type: 2}
+  targetType: 1
+  castRange: 3
+  AoE: 0
+  radius: 0
+  Damage: 1
+  damageType: 0
+  damage: 5
+  ApplyStatusEffects: 0
+  poisonDuration: 0
+  poisonDamage: 0
+  freezeDuration: 0
+  shockPercentage: 0
+  Propagation: 0
+  maxPropagations: 0
+  propagationDelay: 0

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f09e8fc8305bb64f87beca0e84dd2bf, type: 3}
+  m_Name: Caveling
+  m_EditorClassIdentifier: 
+  Name: Caveling
+  icon: {fileID: -387103932, guid: 44a728db23cea9d478f4eacb91f28ebe, type: 3}
+  animatorController: {fileID: 9100000, guid: d90312e02c5002a44a6b7215d358abba, type: 2}
+  material: {fileID: 2100000, guid: fd53763b306ce6d47a3933701c35078e, type: 2}
+  maxHealth: 10
+  movementPoints: 2
+  manaPoints: 1
+  enemy: 1
+  baseSpell: {fileID: 11400000, guid: 0c96009f8df6f314f97fc9f3edcc2846, type: 2}
+  movementSpeed: 3

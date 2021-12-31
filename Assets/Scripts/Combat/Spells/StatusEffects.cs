@@ -60,6 +60,9 @@ public class StatusEffects : MonoBehaviour
             PoisonIndicatorInstance.transform.SetParent(transform);
         }
 
+        if (name.Equals("Player"))
+            GetComponent<PlayerUI>().UpdateUI();
+
         UpdateStatusIndicatorPositions();
     }
     

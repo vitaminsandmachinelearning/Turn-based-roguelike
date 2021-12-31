@@ -15,10 +15,6 @@ public class TurnOrderUI : MonoBehaviour
     [ShowInInspector]
     List<GameObject> turnOrderUIInstances;
 
-    public GameObject turnOrderPointer;
-    public Vector3 turnOrderPointerOffset = new Vector3(0, 8, 0);
-
-    Vector3 boxBasePosition = new Vector3(100, 0, 0);
     public int boxLeftOffset = 120;
 
     public void BuildTurnOrderList()

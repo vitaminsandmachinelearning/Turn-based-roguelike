@@ -29,13 +29,11 @@ public class Spell : MonoBehaviour
     public TargetType targetType;
     public int castRange;
 
-    SpriteRenderer sprite;
-    Animator anim;
-
     List<(EffectPriority, CallEffect)> EffectQueue;
 
-    void Start()
+    public void Cast()
     {
+        GetComponent<Animator>().SetTrigger("Cast");
         switch (targetType)
         {
             case TargetType.Self:

@@ -27,18 +27,23 @@ public class TurnBasedMovementAI : VersionedMonoBehaviour
         traversalProvider = new BlockManager.TraversalProvider(blockManager, BlockManager.BlockMode.AllExceptSelector, new List<SingleNodeBlocker>() { GetComponent<SingleNodeBlocker>() });
     }
 
+    public void Spawn()
+    {
+        GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
+    }
+
     public void StartMovementCalculation(Vector2 targetPosition)
     {
         var p = ABPath.Construct(transform.position, targetPosition, MovementCalculated);
         p.traversalProvider = traversalProvider;
         AstarPath.StartPath(p);
-        p.BlockUntilCalculated();
+        //p.BlockUntilCalculated();
     }
 
     void MovementCalculated(Path p)
     {
         unit.MovementPointsRemaining -= p.path.Count - 1;
-        SendMessage("StartedMoving");
+        SendMessage("StartedMoving", null, SendMessageOptions.DontRequireReceiver);
         StartCoroutine(Move(p));
     }
 
@@ -46,11 +51,14 @@ public class TurnBasedMovementAI : VersionedMonoBehaviour
 	{
         for (int i = 0; i < p.vectorPath.Count; i++)
         {
-            while (transform.position != p.vectorPath[i])
+            while (Vector3.Distance(transform.position, p.vectorPath[i]) > 0.01f)
             {
-                transform.position = Vector2.MoveTowards(transform.position, p.vectorPath[i], Time.deltaTime * movementSpeed);
+                Debug.Log("Moving " + transform.position + " to " + p.vectorPath[i]);
+                //transform.position = Vector2.MoveTowards(transform.position, p.vectorPath[i], Time.deltaTime * movementSpeed);
+                transform.position = p.vectorPath[i];
                 yield return null;
             }
+            transform.position = p.vectorPath[i];
         }
         GetComponent<SingleNodeBlocker>().BlockAtCurrentPosition();
         SendMessage("FinishedMoving");

@@ -9,8 +9,6 @@ public class StartCombat : MonoBehaviour
 
     public void Initiate()
     {
-        units = FindObjectsOfType<Unit>();
-        tc = GetComponent<TurnController>();
-        tc.StartCombat();
+        
     }
 }

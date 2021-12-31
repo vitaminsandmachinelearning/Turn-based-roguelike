@@ -1,20 +1,16 @@
 ﻿using Sirenix.OdinInspector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Spell", order = 1)]
 public class BaseSpell : ScriptableObject
 {
     public string Name;
     public Sprite icon;
-    public RuntimeAnimatorController animationController;
+    public RuntimeAnimatorController animatorController;
 
     [Title("Targetting")]
     public TargetType targetType;
-    public int CastRange;
+    public int castRange;
 
     [Title("Area of Effect")]
     public bool AoE;
@@ -27,16 +23,13 @@ public class BaseSpell : ScriptableObject
 
     [Title("Status Effects")]
     public bool ApplyStatusEffects;
-    public int PoisonStackDuration;
-    public int PoisonStackDamage;
-    public int FreezeDuration;
-    public int ShockPercentage;
+    public int poisonDuration;
+    public int poisonDamage;
+    public int freezeDuration;
+    public int shockPercentage;
 
     [Title("Propagation")]
     public bool Propagation;
-    public int MaxBounces;
-    public float DelayBetweenBounces;
-
-
+    public int maxPropagations;
+    public float propagationDelay;
 }
-

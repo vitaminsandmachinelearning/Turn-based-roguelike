@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Unit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public int MaxHealth = 10;
-    public int Health = 10;
+    public int Health;
     public bool Alive = true;
     public int Initiative = -1;
     public int MovementPointsCap = 5;
@@ -18,8 +18,15 @@ public class Unit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public bool processingTurnActions;
 
     public Sprite unitIcon;
+    SpellBook sb;
     VisionController vc;
     UnitUI unitUI;
+
+    public void Spawn(Vector3 position)
+    {
+        transform.position = position;
+        if (GetComponent<TurnBasedMovementAI>() != null) GetComponent<TurnBasedMovementAI>().Spawn();
+    }
 
     public void TakeDamage(int damage, DamageType damageType)
     {
@@ -44,9 +51,12 @@ public class Unit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                         break;
                 }
             }
+            Debug.Log(name + " taking " + damage + " " + damageType);
             Health -= damage;
             if (Health <= 0)
                 Die();
+            if (name.Equals("Player"))
+                GetComponent<PlayerUI>().UpdateUI();
         }
     }
 
@@ -55,7 +65,6 @@ public class Unit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Alive = false;
         FindObjectOfType<TurnOrderUI>().RemoveUnit(this);
         GetComponent<Animator>().SetBool("Dead", true);
-        Debug.Log(name);
         SendMessage("OnDie", null, SendMessageOptions.DontRequireReceiver);
     }
 
@@ -67,33 +76,46 @@ public class Unit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
+        HighlightUnit();
+    }
+
+    public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        UnhighlightUnit();
+    }
+
+    void HighlightUnit()
+    {
         if (!name.Equals("Player"))
         {
             //Highlight unit on board
             GetComponent<SpriteRenderer>().material.SetFloat("_OutlineAlpha", 0.75f);
             GetComponent<SpriteRenderer>().material.SetColor("_OutlineColor", Color.yellow);
-            FindObjectOfType<TurnController>().hoveredUIUnit = true;
+            FindObjectOfType<VisionController>().isUnitHoveredUI = true;
 
             //Use vision controller to highlight unit movement range
             if (vc == null) vc = FindObjectOfType<VisionController>();
-            vc.UnitHovered = gameObject;
+
             if (unitUI == null) unitUI = FindObjectOfType<UnitUI>();
+            unitUI.UnitPanel.SetActive(true);
             unitUI.unit = this;
         }
     }
 
-    public void OnPointerExit(PointerEventData pointerEventData)
+    void UnhighlightUnit()
     {
         if (!name.Equals("Player"))
         {
             GetComponent<SpriteRenderer>().material.SetFloat("_OutlineAlpha", 0f);
             GetComponent<SpriteRenderer>().material.SetColor("_OutlineColor", Color.green);
-            FindObjectOfType<TurnController>().hoveredUIUnit = false;
+            FindObjectOfType<VisionController>().isUnitHoveredUI = false;
 
-            if (vc == null) vc = FindObjectOfType<VisionController>();
-            vc.UnitHovered = null;
-            if (unitUI == null) unitUI = FindObjectOfType<UnitUI>();
-            unitUI.unit = null;
+            if (vc.UnitSelected == null)
+            {
+                if (unitUI == null) unitUI = FindObjectOfType<UnitUI>();
+                unitUI.UnitPanel.SetActive(false);
+                unitUI.unit = null;
+            }
         }
     }
 }

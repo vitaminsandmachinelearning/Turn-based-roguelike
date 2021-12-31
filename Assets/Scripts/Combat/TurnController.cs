@@ -11,7 +11,6 @@ public class TurnController : MonoBehaviour
 
     public GameObject TurnPointer;
     public Vector3 turnPointerOffset;
-    public bool hoveredUIUnit;
 
     public bool combat = false;
 
@@ -19,7 +18,9 @@ public class TurnController : MonoBehaviour
 
     private void Update()
     {
-        TurnPointer.transform.position = turnOrder[currentTurn].transform.position + turnPointerOffset;
+        if(turnOrder != null)
+            if(turnOrder.Count() > 0)
+                TurnPointer.transform.position = turnOrder[currentTurn].transform.position + turnPointerOffset;
     }
 
     IEnumerator ProcessCombat()

@@ -13,10 +13,12 @@ public class VisionController : MonoBehaviour
     public List<GameObject> highlights;
 
     InputController ic;
+    Unit pu;
     SpellBook sb;
     TurnController tc;
 
-    public GameObject UnitHovered;
+    public GameObject UnitSelected;
+    public bool isUnitHoveredUI;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class VisionController : MonoBehaviour
         activeTargetHighlights = new List<GameObject>();
         activeUnitMovementHighlights = new List<GameObject>();
         ic = FindObjectOfType<InputController>();
+        pu = GameObject.Find("Player").GetComponent<Unit>();
         sb = FindObjectOfType<SpellBook>();
         tc = FindObjectOfType<TurnController>();
     }
@@ -71,9 +74,9 @@ public class VisionController : MonoBehaviour
     void Update()
     {
         //Movement range and spell targetting
-        if(!ic.movementRangeHighlighted && sb.currentSpell == null && !tc.hoveredUIUnit)
+        if(!ic.movementRangeHighlighted && (sb.currentSpell == null || sb.hasCast) && !isUnitHoveredUI)
             ClearHighlighteds();
-        if (sb.currentSpell != null)
+        if (sb.currentSpell != null && !sb.hasCast)
         {
             ClearHighlighteds();
 
@@ -107,20 +110,10 @@ public class VisionController : MonoBehaviour
                     u.GetComponent<SpriteRenderer>().material.SetColor("_OutlineColor", Color.green);
                 }
             }
-
             foreach (GraphNode n in rangeNodesToHighlight)
                 activeHighlights.Add(Instantiate(highlights[1], (Vector3)n.position, Quaternion.identity));
             foreach (GraphNode n in targetNodesToHighlight)
                 activeTargetHighlights.Add(Instantiate(highlights[2], (Vector3)n.position, Quaternion.identity));
-        }
-
-        //Hovered units
-        if (UnitHovered != null && !ic.movementRangeHighlighted && sb.currentSpell == null)
-        {
-            ClearHighlighteds();
-            List<GraphNode> nodesInRangeOfUnit = Util.NodesInRange(UnitHovered.transform.position, UnitHovered.GetComponent<Unit>().MovementPoints);
-            foreach (GraphNode n in nodesInRangeOfUnit)
-                activeUnitMovementHighlights.Add(Instantiate(highlights[3], (Vector3)n.position, Quaternion.identity));
         }
     }
 }

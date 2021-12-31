@@ -9,7 +9,7 @@ public class Propagate : SpellComponent
 
     public int currentPropagations = 0;
     public int maxPropagations = 3;
-    public float propagationDelay = 0f;
+    public float propagationDelay = 0.25f;
 
     List<Vector2> directions = new List<Vector2> { new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, -1) };
 
@@ -44,8 +44,6 @@ public class Propagate : SpellComponent
             {
                 StartCoroutine(PropagateWithDelay(potentialUnits));
             }
-            else
-                Debug.Log("No propagation targets");
         }
         yield return null;
     }
@@ -61,5 +59,6 @@ public class Propagate : SpellComponent
         prop.GetComponent<Propagate>().currentPropagations++;
         prop.GetComponent<Spell>().target = null;
         prop.GetComponent<Spell>().targetType = TargetType.Position;
+        prop.GetComponent<Spell>().Cast();
     }
 }

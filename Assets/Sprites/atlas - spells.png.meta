@@ -130,11 +130,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: atlas - spells_0
+      name: atlas - spells_28
       rect:
         serializedVersion: 2
-        x: 0
-        y: 240
+        x: 80
+        y: 144
         width: 16
         height: 16
       alignment: 0
@@ -146,111 +146,6 @@ TextureImporter:
       bones: []
       spriteID: 7d838cf6b0ad3204da8400ae5597b3ec
       internalID: -670399684
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: atlas - spells_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 240
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90217eea0faad8d47b26b0d13920d115
-      internalID: 85226093
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: atlas - spells_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 240
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6dc18a0369e543a499f6584ba904fe29
-      internalID: 1063926375
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: atlas - spells_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 224
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d76479d8b3205bf47858290ca0b539d3
-      internalID: 1812838739
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: atlas - spells_4
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 224
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e80bfa30fee463348a6b4de54482aa4d
-      internalID: 1360320909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: atlas - spells_5
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 224
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50862eec69225a54eaed1eda7864cfbc
-      internalID: -341291386
       vertices: []
       indices: 
       edges: []
@@ -823,28 +718,112 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_6
+      name: atlas - spells_29
       rect:
         serializedVersion: 2
-        x: 80
+        x: 96
         y: 144
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e174a6a581589634396ebd9357c80d2a
-      internalID: -1450099100
+      spriteID: 9ce7e5a023a7491449e92623dbb9649e
+      internalID: -1816635932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_7
+      name: atlas - spells_30
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f2474aae53b3a2498c206b425e5de85
+      internalID: 1116981726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_31
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c39c6afae863b4f927d2468e65fe33
+      internalID: 863551737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_32
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 941a4bb2dc00f91499fa375c93ed77c3
+      internalID: 210487476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_33
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e7f2fbd85e6cee4bb208b5aeeeae248
+      internalID: -816682202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: atlas - spells_34
       rect:
         serializedVersion: 2
         x: 0
@@ -852,20 +831,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08a3dbc731bd92441bcbe6840cbe7ef6
-      internalID: 927048014
+      spriteID: 57e1e1790b9e3b343819211233f5aa4b
+      internalID: 496168005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_8
+      name: atlas - spells_35
       rect:
         serializedVersion: 2
         x: 16
@@ -873,20 +852,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 332f1f661d6a3c5408f701dad7832cae
-      internalID: 1711610187
+      spriteID: cc5909333a89dfa4b8327fe3d93d2504
+      internalID: -1906761723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_9
+      name: atlas - spells_0
       rect:
         serializedVersion: 2
         x: 32
@@ -900,14 +879,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 219985b625c368d4684c77a41de5e652
-      internalID: -647176297
+      spriteID: b520a74124c8be743810ad1bad38fb83
+      internalID: -1800944216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_28
+      name: atlas - spells_1
       rect:
         serializedVersion: 2
         x: 48
@@ -921,14 +900,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 931a4ed0868773b4b80c1593ed199eeb
-      internalID: -1816635932
+      spriteID: 3d491da3b8d3b7041809f72ea0fb30c4
+      internalID: 85226093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_29
+      name: atlas - spells_2
       rect:
         serializedVersion: 2
         x: 64
@@ -942,14 +921,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 474fe34ac9572604f9880f2758413326
-      internalID: 1116981726
+      spriteID: 9b5175d892990db4db9d5523b17dc3b9
+      internalID: -1548454666
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_30
+      name: atlas - spells_3
       rect:
         serializedVersion: 2
         x: 80
@@ -963,14 +942,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0646176db5ab52749915e64b7d0fcb8b
-      internalID: 863551737
+      spriteID: 0104a53aa80cf9e4fa472b9627f3545f
+      internalID: 1784977131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: atlas - spells_31
+      name: atlas - spells_4
       rect:
         serializedVersion: 2
         x: 96
@@ -984,8 +963,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 133a8f4db47395947ba43c025e65d88a
-      internalID: -1265596528
+      spriteID: fa3d3a04941e3aa4eb827e6f7bf1b93c
+      internalID: 1360320909
       vertices: []
       indices: 
       edges: []
@@ -1001,47 +980,51 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      atlas - spells_29: -1816635932
       atlas - spells_1: 85226093
+      atlas - spells_32: 210487476
+      atlas - spells_7: -1450099100
+      PoisonSpikes5: 1992702726
+      atlas - spells_28: -670399684
+      PoisonSpikes1: -689568680
+      atlas - spells_27: -471413436
+      atlas - spells_14: 1705564159
+      atlas - spells_21: -295655107
+      atlas - spells_19: 1632876471
+      atlas - spells_2: -1548454666
+      atlas - spells_20: -1744027006
+      atlas - spells_22: -11843451
+      atlas - spells_33: -816682202
+      atlas - spells_5: -341291386
+      atlas - spells_34: 496168005
+      atlas - spells_4: 1360320909
+      atlas - spells_6: -1174373820
+      atlas - spells_16: 442052794
+      PoisonSpikes0: 134639481
+      atlas - spells_29: -1816635932
       PoisonSpikes4: -2111337620
       atlas - spells_17: 1155194476
       atlas - spells_30: 1116981726
-      atlas - spells_7: -1450099100
-      PoisonSpikes5: 1992702726
       PoisonSpikes7: -431943061
-      atlas - spells_12: -2064379538
       Empty-64: -1174373820
+      atlas - spells_12: -2064379538
       atlas - spells_10: -591130949
-      atlas - spells_28: -647176297
-      PoisonSpikes1: -689568680
-      atlas - spells_25: 1100048776
-      atlas - spells_27: -471413436
-      atlas - spells_14: 1705564159
       atlas - spells_8: 927048014
-      atlas - spells_21: -295655107
+      atlas - spells_25: 1100048776
       PoisonSpikes3: 2081631917
-      atlas - spells_2: 1063926375
-      atlas - spells_19: 1632876471
+      atlas - spells_35: -1906761723
       atlas - spells_26: 1774915370
       atlas - spells_15: -1543892635
       atlas - spells_18: 1031887777
       PoisonSpikes2: 215117983
-      atlas - spells_3: 1812838739
-      atlas - spells_20: -1744027006
-      atlas - spells_22: -11843451
       atlas - spells_31: 863551737
       atlas - spells_9: 1711610187
+      atlas - spells_3: 1784977131
       atlas - spells_24: -1723192752
       PoisonSpikes6: 1327264048
-      atlas - spells_5: -341291386
-      atlas - spells_4: 1360320909
       atlas - spells_23: 1298193668
-      atlas - spells_6: -1174373820
       atlas - spells_11: 815184928
-      atlas - spells_0: -670399684
+      atlas - spells_0: -1800944216
       atlas - spells_13: -890226353
-      atlas - spells_16: 442052794
-      PoisonSpikes0: 134639481
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

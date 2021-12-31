@@ -13,7 +13,7 @@ public enum DamageType
 
 public class Damage : SpellComponent
 {
-    public int damage;
+    public int damage = 0;
     public DamageType damageType = DamageType.Physical;
 
     public override EffectPriority Getpriority() { return EffectPriority.OnHit; }

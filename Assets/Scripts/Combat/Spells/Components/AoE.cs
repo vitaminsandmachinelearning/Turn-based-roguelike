@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 
 public class AoE : SpellComponent
 {
-    public int radius;
+    public int radius = 0;
 
     public override EffectPriority Getpriority(){ return EffectPriority.PostCast; }
 
@@ -47,6 +47,7 @@ public class AoE : SpellComponent
                 var o = Instantiate(gameObject, (Vector3)n.position, Quaternion.identity);
                 o.GetComponent<Spell>().target = null;
                 o.GetComponent<Spell>().targetType = TargetType.Position;
+                o.GetComponent<Spell>().Cast();
             }
         }
     }

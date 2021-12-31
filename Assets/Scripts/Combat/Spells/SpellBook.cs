@@ -4,17 +4,32 @@ using UnityEngine;
 
 public class SpellBook : MonoBehaviour
 {
-    public List<GameObject> spells;
+    public List<BaseSpell> spells;
     public GameObject currentSpell;
     Unit unit;
     PlayerUI ui;
 
+    public bool hasCast = false;
+
     public void SelectSpell(int index)
     {
         if (index < spells.Count)
-            currentSpell = spells[index];
+        {
+            currentSpell = SpellBuilder.Build(spells[index]);
+            hasCast = false;
+        }
         else
             currentSpell = null;
+    }
+
+    public void DeselectSpell()
+    {
+        if (currentSpell != null)
+        {
+            if (!hasCast)
+                Destroy(currentSpell);
+            currentSpell = null;
+        }
     }
 
     public void CastSpell()
@@ -26,10 +41,11 @@ public class SpellBook : MonoBehaviour
             if (Util.NodesInRange(transform.position, currentSpell.GetComponent<Spell>().castRange).Contains(Util.NearestToCursor()))
             {
                 unit.ManaPointsRemaining--;
-                var s = Instantiate(currentSpell, (Vector3)Util.NearestToCursor().position, Quaternion.identity);
+                currentSpell.transform.position = (Vector3)Util.NearestToCursor().position;
+                currentSpell.GetComponent<Spell>().Cast();
+                hasCast = true;
             }
         }
         ui.UpdateUI();
-        currentSpell = null;
     }
 }

@@ -19,13 +19,13 @@ public class TurnOrderUIUnitHolder : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         unit.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineAlpha", 0.75f);
         unit.GetComponent<SpriteRenderer>().material.SetColor("_OutlineColor", Color.yellow);
-        FindObjectOfType<TurnController>().hoveredUIUnit = true;
+        FindObjectOfType<VisionController>().isUnitHoveredUI = true;
     }
 
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         unit.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineAlpha", 0f);
         unit.GetComponent<SpriteRenderer>().material.SetColor("_OutlineColor", Color.green);
-        FindObjectOfType<TurnController>().hoveredUIUnit = false;
+        FindObjectOfType<VisionController>().isUnitHoveredUI = false;
     }
 }
